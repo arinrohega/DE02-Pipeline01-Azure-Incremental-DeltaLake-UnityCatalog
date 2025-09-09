@@ -62,10 +62,29 @@ To create a watermark method for incremental loading in Azure Data Factory, an e
 
 <img width="1233" height="430" alt="adls solo empty" src="https://github.com/user-attachments/assets/f7ce7e7a-53ff-4a88-aefc-8fdf50eb4804" />
 
-### 3. Azure Data Factory (ADF) 🔄
+### 2. Azure Data Factory (ADF) 🔄
 
 <img width="1916" height="282" alt="LOGOADF" src="https://github.com/user-attachments/assets/5b73cd7c-52b4-414b-91f1-f46fb7746443" />
 
+### 2.1 Objective🔄
+
+The main goal for the pipeline and each activity can be described like this:  
+
+For the first batch:
+1) Read the full desired source table from MySQL.
+2) Write it to the ADLS Landing Bucket using Parquet format.
+3) Write a separated csv with the watermark value for this batch.
+4) Repeat this for each desired table.
+
+For the following batches:
+1) Read only the new and updated rows from the desired table, using the watermark csv. 
+2) Write it to the ADLS Landing Bucket on Parquet format.
+3) Update the watermark value for this batch.
+4) Repeat this for each desired table.
+   
+Trigger a Databrick job after every batch.
+
+### 2.2 Objective🔄
 
 ----------------------------------------
 
@@ -78,30 +97,11 @@ To create a watermark method for incremental loading in Azure Data Factory, an e
 
 The main goal of each Process Group in NIFI is:  
 
-1) Read a table from MySQL  
-2) Write it to the HDFS Staging Bucket on Avro Format  
+1) Read the desired source table from MySQL  
+2) Write it to the ADLS Landing Bucket on parquet format. 
 3) Simultaneously generate a log table with the path of the most recently written table  
   
 NIFI doesn´t support writes on parquet or delta format, so this aproach emulates a Delta-like method, enabling PySpark scripts to identify the current table version between multiple batches.
-
-### 3.2 Volumes for NIFI + MySQL + HDFS🔄
-
-NIFI needs some dependencies to read from MySQL and write to HDFS.
-
-Considering that the current [docker-compose.yml](https://github.com/arinrohega/DE01-Pipeline01-ApacheStack-DeltaLake/blob/main/Docker%20Setup/docker-compose.yml) created this volumes:
-
-          nifi:  
-            volumes:  
-              - ./nifi/lib:/opt/nifi/nifi-current/lib  
-              - ./shared-data:/opt/nifi/shared-data  
-
-The following Repository Files were mounted locally for the volumes to work:
-
-        - "C:\docker\apache-stack\nifi\lib\mysql-connector-j-9.3.0.jar"  
-        - "C:\docker\apache-stack\nifi\lib\nifi-hadoop-nar-2.4.0.nar"  
-        - "C:\docker\apache-stack\nifi\lib\nifi-hadoop-libraries-nar-2.4.0.nar"  
-        - "C:\docker\apache-stack\shared-data\core-site.xml"  
-        - "C:\docker\apache-stack\shared-data\hdfs-site.xml"   
 
 ### 3.3 Creating Process Group and Controller Services🔄
 

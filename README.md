@@ -98,8 +98,7 @@ Datasets for source and target storages were mounted with the following configur
 Targets the desired location for the table and uses the following dynamic content for the path:
 
 To define local development resources (Execution or real cluster will use different settings)
-
-    .master("local[*]") \
+    
     @concat('pipeline01/', dataset().table_name)
 
 To ensure all required libraries were available to the Python container:

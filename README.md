@@ -144,16 +144,16 @@ The dataset list looked like this after creating all of them:
 
 <img width="1617" height="589" alt="adf pipeline" src="https://github.com/user-attachments/assets/eccb9122-6fe5-401d-83d8-17ca2101d8ed" />
 
-1) **Por Cada Tabla (ForEach):** Loops through the list of tables to process each one.
-2) **Check If WM Table Exists (GetMetadata):** Checks if the watermark file for the table exists in storage.
+1) **Por Cada Tabla (ForEach):** Loops through the list of the 10 tables to process each one.
+2) **Check If WM Table Exists (GetMetadata):** Checks if the watermark file for the table exists in the **ADLS_pipeline01_watermark dataset**.
 3) **If Not Exists Then True (IfCondition):** Triggers true if its the first Batch, because no watermark was found.
-4) **Get Actual Max Watermark (Lookup):** Gets the maximum value from the "updated_at" column in the source table.
+4) **Get Actual Max Watermark (Lookup):** Gets the actual maximum value from the "updated_at" column in the source table.
 5) **ReadSQL WriteADLS Complete (Copydata):** Copies of the entire table from **MySQL_companysimulation** into **ADLS_pipeline01_table** dataset
-6) **Create Watermark Table (Copydata):** Copies **Empty_csv**, adds new columns with the table name and max watermark value, and sinks it to **ADLS_pipeline01_watermark** dataset
-7) **Get Actual Max Watermark 2 (Lookup):** Gets the current max watermark value from **MySQL_companysimulation** for incremental load.
+6) **Create Watermark Table (Copydata):** Copies **Empty_csv**, adds new columns with the max "updated_at" value, and sinks it to **ADLS_pipeline01_watermark** dataset
+7) **Get Actual Max Watermark 2 (Lookup):** Gets the current max "updated_at" value from **MySQL_companysimulation** for incremental load.
 8) **Get Last Watermark (Lookup):** Retrieves the last stored watermark value from **ADLS_pipeline01_watermark** dataset
 9) **If New Rows Then True (IfCondition):** Compares actual and last stored watermark value.
-10) **ReadSQL WriteADLS Incremental (Copydata):** Copies from **MySQL_companysimulation** only the new or changed records since the last watermark.
+10) **ReadSQL WriteADLS Incremental (Copydata):** Copies from **MySQL_companysimulation** filtering by only the new or changed records since the last watermark.
 11) **Update Watermark Table (Copydata):** Updates the watermark file with the new max value for the next batch.
 12) **Databricks Job (DatabricksJob):** Triggers a Databricks job after all tables are processed.
 

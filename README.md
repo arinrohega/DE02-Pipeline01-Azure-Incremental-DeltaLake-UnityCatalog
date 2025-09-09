@@ -105,13 +105,17 @@ Uses the following dynamic content for the path:
 ```
 @concat('pipeline01/', dataset().table_name) / @concat(dataset().table_name, '_', formatDateTime(addHours(utcNow(), -7), 'yyyyMMdd_HHmmss'))
 ```
- 
+
+  
 2) ADLS_pipeline01_watermark: Targets the desired location for the watermark csv.
  
-    
+  
 <img width="982" height="466" alt="dataset2" src="https://github.com/user-attachments/assets/3e1e7f9d-9cab-4229-9785-ebbab2c72aa4" />
-
-
+ 
+```
+ @concat('pipeline01/_watermarks/', dataset().table_name) / @concat('watermark_lastBatch_',dataset().table_name)
+```
+   
 <img width="353" height="385" alt="datrasets" src="https://github.com/user-attachments/assets/665422f3-08f4-4de4-8c54-97742ae62a4c" />
 
 

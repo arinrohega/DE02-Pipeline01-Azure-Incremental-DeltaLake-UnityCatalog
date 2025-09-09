@@ -45,25 +45,22 @@ All tables were made and loaded locally to MySQL database. While all data is fic
 Theres a glossary at the end, providing English translations of the table and column names if needed.
 
 
-### 1. Azure Data Lake Storage 🗂️
+### 1. Azure Data Lake Storage (ADLS) 🗂️
 
 <img width="1916" height="282" alt="LOGO1" src="https://github.com/user-attachments/assets/b78078a6-16e1-4194-a74d-5e21e21d0730" />
 
-### 1.1 Volumes for Hadoop User Experience (HUE) 🗂️
 
-Considering that the current [docker-compose.yml](https://github.com/arinrohega/DE01-Pipeline01-ApacheStack-DeltaLake/blob/main/Docker%20Setup/docker-compose.yml) created this volumes:
+### 1.1 Creating Medallion Architecture🗂️
 
-          hue:  
-            volumes:  
-              - ./shared-data/hue.ini:/usr/share/hue/desktop/conf/hue.ini  
-              - ./shared-data/hue-data:/hue  
+After creating a resource group in Azure Protal and a Storage Account for ADLS, the following containers were created to be the physical location of the data, naming 3 of them with a medallion hierarchy, one for landing raw data, and one for the metastore of Unity Catalog:
 
-The following Repository File was mounted locally for the volumes to work:
-  
-          "C:\docker\apache-stack\shared-data\hue.ini"
+<img width="1224" height="558" alt="adls1" src="https://github.com/user-attachments/assets/d2d25570-79f5-4ac6-9218-356502e2e32a" />
 
-### 2.2 Creating Medallion Folders in HDFS using HUE🗂️
+### 1.2 Incremental Loading Setup 🗂️
 
+To create a watermark method for incremental loading in Azure Data Factory, an empty csv dataset with only header was uploaded to the Landing Container:
+
+<img width="1233" height="430" alt="adls solo empty" src="https://github.com/user-attachments/assets/f7ce7e7a-53ff-4a88-aefc-8fdf50eb4804" />
 
 
 

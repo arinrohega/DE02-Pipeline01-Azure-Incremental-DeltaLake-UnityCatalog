@@ -106,6 +106,7 @@ Uses the following dynamic content for the path:
 ```
 
 <br>
+
 2) **ADLS_pipeline01_watermark**: Targets the desired location for the watermark csv.   
 
 <br>
@@ -118,6 +119,7 @@ Uses the following dynamic content for the path:
 @concat('pipeline01/_watermarks/', dataset().table_name) / @concat('watermark_lastBatch_',dataset().table_name)
 ```
 <br>
+
 3) **Empty_csv**: Targets the csv already uploaded in ADLS   
 
 <br>
@@ -139,7 +141,29 @@ The dataset list looked like this after creating all of them:
 
 ### 2.4 Designing Pipeline´s Activities🔄
 
+1) Por Cada Tabla (ForEach): Loops through the list of tables to process each one.
 
+2) Check If WM Table Exists (GetMetadata): Checks if a watermark file for the table exists in storage.
+
+3) If Not Exists Then True (IfCondition): Controls the flow for the first-time load if no watermark is found.
+
+4) Get Actual Max Watermark (Lookup): Fetches the maximum value from the watermark column in the source table.
+
+5) ReadSQL WriteADLS Complete (Copy): Performs a full copy of the entire source table to ADLS.
+
+6) Create Watermark Table (Copy): Generates the initial watermark file with the table name and max watermark value.
+
+7) Get Actual Max Watermark 2 (Lookup): Gets the current max watermark value from the source table for incremental load.
+
+8) Get Last Watermark (Lookup): Retrieves the last stored watermark value from the file in ADLS.
+
+9) If New Rows Then True (IfCondition): Controls the flow if new data is found by comparing watermarks.
+
+10) ReadSQL WriteADLS Incremental (Copy): Copies only the new or changed records since the last watermark.
+
+11) Update Watermark Table (Copy): Updates the watermark file with the new max value for the next run.
+
+12) Databricks Job (DatabricksJob): Triggers a downstream Databricks job after all tables are processed.
 
 
 

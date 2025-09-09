@@ -140,7 +140,7 @@ The dataset list looked like this after creating all of them:
 <img width="1916" height="577" alt="datrasets" src="https://github.com/user-attachments/assets/a21ce129-6631-4847-ae11-a3f044ebbb34" />
 
 
-### 2.4 Designing Pipeline´s Activities🔄
+### 2.4 Pipeline´s Activities🔄
 
 <img width="1617" height="589" alt="adf pipeline" src="https://github.com/user-attachments/assets/eccb9122-6fe5-401d-83d8-17ca2101d8ed" />
 

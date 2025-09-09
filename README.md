@@ -94,7 +94,7 @@ To connect MySQL to the cloud being different network environments, Integration 
 
 Datasets for source and target storages were mounted with the following configurations:
 
-1) ADLS_pipeline01_table: Targets the desired location for the desired table.  
+1) **ADLS_pipeline01_table**: Targets the desired location for the desired table.  
 
 <img width="982" height="460" alt="dataset1" src="https://github.com/user-attachments/assets/55572880-fe09-40f6-8c5c-e3b81bb4750f" />
 <br>
@@ -106,7 +106,7 @@ Uses the following dynamic content for the path:
 ```
 
 <br>
-2) ADLS_pipeline01_watermark: Targets the desired location for the watermark csv.   
+2) **ADLS_pipeline01_watermark**: Targets the desired location for the watermark csv.   
 
 <br>
 
@@ -118,7 +118,7 @@ Uses the following dynamic content for the path:
 @concat('pipeline01/_watermarks/', dataset().table_name) / @concat('watermark_lastBatch_',dataset().table_name)
 ```
 <br>
-3) Empty_csv: Targets the csv already uploaded in ADLS   
+3) **Empty_csv**: Targets the csv already uploaded in ADLS   
 
 <br>
 <br>
@@ -128,7 +128,7 @@ Uses the following dynamic content for the path:
 <br>
 <br>
 
-4) MySQL_companysimulation: Targets the source OLTP database
+4) **MySQL_companysimulation**: Targets the source OLTP database
 
 <img width="866" height="268" alt="dataset4" src="https://github.com/user-attachments/assets/3acee268-83fc-4116-a13a-7aec1a280ba1" />
 
@@ -137,7 +137,7 @@ The dataset list looked like this after creating all of them:
 <img width="1916" height="577" alt="datrasets" src="https://github.com/user-attachments/assets/a21ce129-6631-4847-ae11-a3f044ebbb34" />
 
 
-
+### 2.4 Designing Pipeline´s Activities🔄
 
 
 

@@ -152,8 +152,8 @@ The dataset list looked like this after creating all of them:
 7) **Get Actual Max Watermark 2 (Lookup):** Gets the current max watermark value from **MySQL_companysimulation** for incremental load.
 8) **Get Last Watermark (Lookup):** Retrieves the last stored watermark value from **ADLS_pipeline01_watermark** dataset
 9) **If New Rows Then True (IfCondition):** Compares actual and last stored watermark value.
-10) **ReadSQL WriteADLS Incremental (Copy):** Copies from **MySQL_companysimulation** only the new or changed records since the last watermark.
-11) **Update Watermark Table (Copy):** Updates the watermark file with the new max value for the next batch.
+10) **ReadSQL WriteADLS Incremental (Copydata):** Copies from **MySQL_companysimulation** only the new or changed records since the last watermark.
+11) **Update Watermark Table (Copydata):** Updates the watermark file with the new max value for the next batch.
 12) **Databricks Job (DatabricksJob):** Triggers a Databricks job after all tables are processed.
 
 

@@ -141,6 +141,8 @@ The dataset list looked like this after creating all of them:
 
 ### 2.4 Designing Pipeline´s Activities🔄
 
+<img width="1617" height="589" alt="adf pipeline" src="https://github.com/user-attachments/assets/eccb9122-6fe5-401d-83d8-17ca2101d8ed" />
+
 1) **Por Cada Tabla (ForEach):** Loops through the list of tables to process each one.
 2) **Check If WM Table Exists (GetMetadata):** Checks if the watermark file for the table exists in storage.
 3) **If Not Exists Then True (IfCondition):** Triggers true if its the first Batch, because no watermark was found.

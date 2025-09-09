@@ -98,8 +98,13 @@ Datasets for source and target storages were mounted with the following configur
   
     @concat('pipeline01/', dataset().table_name) / @concat(dataset().table_name, '_', formatDateTime(addHours(utcNow(), -7), 'yyyyMMdd_HHmmss'))
 
-To ensure all required libraries were available to the Python container:
-    
+To define local development resources (Execution or real cluster will use different settings)
+
+    @concat('pipeline01/', dataset().table_name) / @concat(dataset().table_name, '_', formatDateTime(addHours(utcNow(), -7), 'yyyyMMdd_HHmmss'))
+    .master("local[*]") \
+    .config("spark.executor.instances", "1") \
+    .config("spark.executor.cores", "2") \
+    .config("spark.executor.memory", "1g") \
 
 <img width="982" height="460" alt="dataset1" src="https://github.com/user-attachments/assets/55572880-fe09-40f6-8c5c-e3b81bb4750f" />
 

@@ -112,14 +112,10 @@ Uses the following dynamic content for the path:
 Uses the following dynamic content for the path:  
 <br> 
 ```
- @concat('pipeline01/_watermarks/', dataset().table_name) / @concat('watermark_lastBatch_',dataset().table_name)  
+@concat('pipeline01/_watermarks/', dataset().table_name) / @concat('watermark_lastBatch_',dataset().table_name)  
 ```
 <br>
 3) Empty_csv: Targets the csv already uploaded in ADLS   
-<br>
-<br>
-<br>
-<br>
 <br>
 <img width="928" height="266" alt="dataset3" src="https://github.com/user-attachments/assets/67b3889e-d42c-43b5-9354-7029182fa609" />
 

@@ -28,7 +28,8 @@ An applicants/prospects dataset that shows the most relevant metrics from their 
 
 ## Architecture
 
-<img width="1634" height="940" alt="ETL 2025-Copia de Página-2 drawio" src="https://github.com/user-attachments/assets/b9797819-848e-443c-8492-78a3032e0a59" />
+<img width="1710" height="682" alt="ETL 2025-Copia de Página-2 drawio" src="https://github.com/user-attachments/assets/27eca824-0103-4bf5-85dd-c5da477a057f" />
+
 
 
 

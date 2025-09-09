@@ -84,7 +84,12 @@ For the following batches:
    
 Trigger a Databrick job after every batch.
 
-### 2.2 Objective🔄
+### 2.2 Adding Integration Runtime🔄
+
+To connect MySQL to the cloud being different network environments, Integration Runtime was added on the Manage section of ADF:
+
+<img width="1213" height="399" alt="integrationruntime" src="https://github.com/user-attachments/assets/622a509b-d2f5-4d68-9d29-37bead1677ba" />
+
 
 ----------------------------------------
 

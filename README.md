@@ -95,37 +95,33 @@ To connect MySQL to the cloud being different network environments, Integration 
 Datasets for source and target storages were mounted with the following configurations:
 
 1) ADLS_pipeline01_table: Targets the desired location for the desired table.  
-  
-    
+
 <img width="982" height="460" alt="dataset1" src="https://github.com/user-attachments/assets/55572880-fe09-40f6-8c5c-e3b81bb4750f" />
- 
- 
+<br>
+
 Uses the following dynamic content for the path:   
- 
+<br> 
 ```
 @concat('pipeline01/', dataset().table_name) / @concat(dataset().table_name, '_', formatDateTime(addHours(utcNow(), -7), 'yyyyMMdd_HHmmss'))
 ```
-
-  
+<br>
 2) ADLS_pipeline01_watermark: Targets the desired location for the watermark csv.  
- 
   
 <img width="982" height="466" alt="dataset2" src="https://github.com/user-attachments/assets/3e1e7f9d-9cab-4229-9785-ebbab2c72aa4" />
-
+<br>
 Uses the following dynamic content for the path:  
 ```
  @concat('pipeline01/_watermarks/', dataset().table_name) / @concat('watermark_lastBatch_',dataset().table_name)  
 ```
-
+<br>
 3) Empty_csv: Targets the csv already uploaded in ADLS   
+<br>
+<br>
+<br>
+<br>
+<br>
+<img width="928" height="266" alt="dataset3" src="https://github.com/user-attachments/assets/67b3889e-d42c-43b5-9354-7029182fa609" />
 
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<img width="928" height="439" alt="dataset3" src="https://github.com/user-attachments/assets/eaeb6a86-e254-4bc2-83bc-d360e8714687" />
 
 <img width="353" height="385" alt="datrasets" src="https://github.com/user-attachments/assets/665422f3-08f4-4de4-8c54-97742ae62a4c" />
 

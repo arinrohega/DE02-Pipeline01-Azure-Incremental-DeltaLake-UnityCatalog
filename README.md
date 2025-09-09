@@ -98,7 +98,6 @@ Datasets for source and target storages were mounted with the following configur
 
 <img width="982" height="460" alt="dataset1" src="https://github.com/user-attachments/assets/55572880-fe09-40f6-8c5c-e3b81bb4750f" />
 <br>
-
 Uses the following dynamic content for the path:   
 <br> 
 ```
@@ -109,7 +108,19 @@ Uses the following dynamic content for the path:
   
 <img width="982" height="466" alt="dataset2" src="https://github.com/user-attachments/assets/3e1e7f9d-9cab-4229-9785-ebbab2c72aa4" />
 <br>
-Uses the following dynamic content for the path:  
+Uses the following dynamic content for the path:   
+<br> 
+```
+@concat('pipeline01/_watermarks/', dataset().table_name) / @concat('watermark_lastBatch_',dataset().table_name)  
+```
+<br>
+
+
+
+
+
+<br>
+Uses the following dynamic content for the path:
 <br> 
 ```
 @concat('pipeline01/_watermarks/', dataset().table_name) / @concat('watermark_lastBatch_',dataset().table_name)  

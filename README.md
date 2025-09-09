@@ -117,7 +117,6 @@ Uses the following dynamic content for the path:
 ```
 @concat('pipeline01/_watermarks/', dataset().table_name) / @concat('watermark_lastBatch_',dataset().table_name)
 ```
-
 <br>
 3) Empty_csv: Targets the csv already uploaded in ADLS   
 

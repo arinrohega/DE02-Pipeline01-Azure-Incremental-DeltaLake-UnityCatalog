@@ -63,18 +63,6 @@ To create a watermark method for incremental loading in Azure Data Factory, an e
 
 <img width="1233" height="430" alt="adls solo empty" src="https://github.com/user-attachments/assets/f7ce7e7a-53ff-4a88-aefc-8fdf50eb4804" />
 
-
-
-
-
-
-
-
-
-
-
-
-
 ----------------------------------------
 ### 2. Azure Data Factory (ADF) 🔄
 

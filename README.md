@@ -94,12 +94,9 @@ To connect MySQL to the cloud being different network environments, Integration 
 
 Datasets for source and target storages were mounted with the following configurations:
 
-1) ADLS_pipeline01_table:
-Targets the desired location for the table and uses the following dynamic content for the path:
-
-To define local development resources (Execution or real cluster will use different settings)
-    
-    @concat('pipeline01/', dataset().table_name)
+1) ADLS_pipeline01_table: Targets the desired location for the table and uses the following dynamic content for the path:
+  
+    @concat('pipeline01/', dataset().table_name) / @concat(dataset().table_name, '_', formatDateTime(addHours(utcNow(), -7), 'yyyyMMdd_HHmmss'))
 
 To ensure all required libraries were available to the Python container:
     

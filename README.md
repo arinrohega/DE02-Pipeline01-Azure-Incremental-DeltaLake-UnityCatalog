@@ -44,6 +44,7 @@ All tables were made and loaded locally to MySQL database. While all data is fic
 
 Theres a glossary at the end, providing English translations of the table and column names if needed.
 
+## Proyect Showcase Guide 
 
 ### 1. Azure Data Lake Storage (ADLS) 🗂️
 

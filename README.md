@@ -118,8 +118,11 @@ Uses the following dynamic content for the path:
 
 <br>
 3) Empty_csv: Targets the csv already uploaded in ADLS   
-<br>
 <img width="928" height="266" alt="dataset3" src="https://github.com/user-attachments/assets/67b3889e-d42c-43b5-9354-7029182fa609" />
+
+<br>
+<br>
+
 
 
 <img width="353" height="385" alt="datrasets" src="https://github.com/user-attachments/assets/665422f3-08f4-4de4-8c54-97742ae62a4c" />

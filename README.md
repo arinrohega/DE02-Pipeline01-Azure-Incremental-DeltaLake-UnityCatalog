@@ -147,9 +147,9 @@ The dataset list looked like this after creating all of them:
 1) **Por Cada Tabla (ForEach):** Loops through the list of the 10 tables to process each one.
 2) **Check If WM Table Exists (GetMetadata):** Checks if the watermark file for the table exists in the **ADLS_pipeline01_watermark dataset**.
 3) **If Not Exists Then True (IfCondition):** Triggers true if its the first Batch, because no watermark was found.
-4) **Get Actual Max Watermark (Lookup):** Gets the actual maximum value from the "updated_at" column in the source table.
+4) **Get Actual Max Watermark (Lookup):** Gets the actual maximum value from the "updated_at" column in the **MySQL_companysimulation** table.
 5) **ReadSQL WriteADLS Complete (Copydata):** Copies of the entire table from **MySQL_companysimulation** into **ADLS_pipeline01_table** dataset
-6) **Create Watermark Table (Copydata):** Copies **Empty_csv**, adds new columns with the max "updated_at" value, and sinks it to **ADLS_pipeline01_watermark** dataset
+6) **Create Watermark Table (Copydata):** Copies **Empty_csv**, adds a watermark column with the max "updated_at" value, and sinks it to **ADLS_pipeline01_watermark** dataset
 7) **Get Actual Max Watermark 2 (Lookup):** Gets the current max "updated_at" value from **MySQL_companysimulation** for incremental load.
 8) **Get Last Watermark (Lookup):** Retrieves the last stored watermark value from **ADLS_pipeline01_watermark** dataset
 9) **If New Rows Then True (IfCondition):** Compares actual and last stored watermark value.

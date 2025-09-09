@@ -30,10 +30,6 @@ An applicants/prospects star schema tables that shows the most relevant metrics 
 
 <img width="1672" height="679" alt="222 drawio" src="https://github.com/user-attachments/assets/1fc1a6db-d907-4f7d-8653-f7981ecf98b9" />
 
-
-
-
-
 ## Data Model
 ### Complete OLTP Database Model
 ![datamodel1](https://github.com/user-attachments/assets/cc53a22c-a9ae-44d2-9b59-fb38ac1bdeeb)
@@ -49,7 +45,24 @@ All tables were made and loaded locally to MySQL database. While all data is fic
 Theres a glossary at the end, providing English translations of the table and column names if needed.
 
 
+### 1. Azure Data Lake Storage 🗂️
 
+<img width="1916" height="282" alt="LOGO1" src="https://github.com/user-attachments/assets/b78078a6-16e1-4194-a74d-5e21e21d0730" />
+
+### 1.1 Volumes for Hadoop User Experience (HUE) 🗂️
+
+Considering that the current [docker-compose.yml](https://github.com/arinrohega/DE01-Pipeline01-ApacheStack-DeltaLake/blob/main/Docker%20Setup/docker-compose.yml) created this volumes:
+
+          hue:  
+            volumes:  
+              - ./shared-data/hue.ini:/usr/share/hue/desktop/conf/hue.ini  
+              - ./shared-data/hue-data:/hue  
+
+The following Repository File was mounted locally for the volumes to work:
+  
+          "C:\docker\apache-stack\shared-data\hue.ini"
+
+### 2.2 Creating Medallion Folders in HDFS using HUE🗂️
 
 
 

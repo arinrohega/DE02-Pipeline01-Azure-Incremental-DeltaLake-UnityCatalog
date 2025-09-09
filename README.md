@@ -106,8 +106,10 @@ Uses the following dynamic content for the path:
 ```
 
 <br>
-2) ADLS_pipeline01_watermark: Targets the desired location for the watermark csv.  
-  
+2) ADLS_pipeline01_watermark: Targets the desired location for the watermark csv.   
+
+<br>
+
 <img width="982" height="466" alt="dataset2" src="https://github.com/user-attachments/assets/3e1e7f9d-9cab-4229-9785-ebbab2c72aa4" />
 Uses the following dynamic content for the path:   
 <br>
@@ -118,6 +120,9 @@ Uses the following dynamic content for the path:
 
 <br>
 3) Empty_csv: Targets the csv already uploaded in ADLS   
+
+<br>
+
 <img width="928" height="266" alt="dataset3" src="https://github.com/user-attachments/assets/67b3889e-d42c-43b5-9354-7029182fa609" />
 
 <br>

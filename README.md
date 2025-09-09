@@ -95,9 +95,6 @@ To connect MySQL to the cloud being different network environments, Integration 
 Datasets for source and target storages were mounted with the following configurations:
 
 1) **ADLS_pipeline01_table**: Targets the desired location for the source table.  
-2) **ADLS_pipeline01_watermark**: Targets the desired location for the watermark csv.
-3) **Empty_csv**: Targets the csv already uploaded in ADLS
-4) **MySQL_companysimulation**: Targets the source OLTP database
 
 <img width="982" height="460" alt="dataset1" src="https://github.com/user-attachments/assets/55572880-fe09-40f6-8c5c-e3b81bb4750f" />
 <br>

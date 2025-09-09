@@ -62,7 +62,122 @@ To create a watermark method for incremental loading in Azure Data Factory, an e
 
 <img width="1233" height="430" alt="adls solo empty" src="https://github.com/user-attachments/assets/f7ce7e7a-53ff-4a88-aefc-8fdf50eb4804" />
 
+### 3. Azure Data Factory (ADF) 🔄
 
+<img width="1916" height="282" alt="LOGOADF" src="https://github.com/user-attachments/assets/5b73cd7c-52b4-414b-91f1-f46fb7746443" />
+
+
+----------------------------------------
+
+### 3. Apache NIFI 🔄
+
+![LOGO2](https://github.com/user-attachments/assets/28c4facd-dbc4-42b6-a54e-31bbdf0e3e68)
+
+
+### 3.1 Objective🔄
+
+The main goal of each Process Group in NIFI is:  
+
+1) Read a table from MySQL  
+2) Write it to the HDFS Staging Bucket on Avro Format  
+3) Simultaneously generate a log table with the path of the most recently written table  
+  
+NIFI doesn´t support writes on parquet or delta format, so this aproach emulates a Delta-like method, enabling PySpark scripts to identify the current table version between multiple batches.
+
+### 3.2 Volumes for NIFI + MySQL + HDFS🔄
+
+NIFI needs some dependencies to read from MySQL and write to HDFS.
+
+Considering that the current [docker-compose.yml](https://github.com/arinrohega/DE01-Pipeline01-ApacheStack-DeltaLake/blob/main/Docker%20Setup/docker-compose.yml) created this volumes:
+
+          nifi:  
+            volumes:  
+              - ./nifi/lib:/opt/nifi/nifi-current/lib  
+              - ./shared-data:/opt/nifi/shared-data  
+
+The following Repository Files were mounted locally for the volumes to work:
+
+        - "C:\docker\apache-stack\nifi\lib\mysql-connector-j-9.3.0.jar"  
+        - "C:\docker\apache-stack\nifi\lib\nifi-hadoop-nar-2.4.0.nar"  
+        - "C:\docker\apache-stack\nifi\lib\nifi-hadoop-libraries-nar-2.4.0.nar"  
+        - "C:\docker\apache-stack\shared-data\core-site.xml"  
+        - "C:\docker\apache-stack\shared-data\hdfs-site.xml"   
+
+### 3.3 Creating Process Group and Controller Services🔄
+
+To read MySQL and write tables on Avro format, the following Controller Services need to be added and enabled to the Process Group:  
+
+1) AvroReader   
+2) AvroRecordSetWriter   
+3) DBCPConnectionPool
+
+After confirming that nifi container was running, the NIFI web interface was accessed via https://localhost:8443/ 
+
+The Controller Services were configured by creating a new Process Group > Entering the Process Group > Opening the Controller Services menu > Adding and enabling each Controller Service.
+
+![nifi3](https://github.com/user-attachments/assets/2dc0a4a8-c567-4a79-bebc-9acc62ee1c4f)
+
+![4](https://github.com/user-attachments/assets/964f5a42-1719-4f21-8042-6c73516af2c1)
+
+![nifi7](https://github.com/user-attachments/assets/0f02aec3-fea0-481e-88b3-a62793ccd891)
+
+![nifi6](https://github.com/user-attachments/assets/9b3f01e7-7696-4a39-a9b5-9922db5ba5ec)
+
+
+### 3.4 Adding the Processors to the Process Group 🔄
+
+To execute the reads and writes, the following Processors were added to the Process Group in order:
+
+1) **GenerateFlowFile:** Triggers the pipeline with an empty file  
+2) **UpdateAttribute:** Sets table name  
+3) **ExecuteSQL:** Runs Query to extract the table from MySQL, uses the controller DBCPConnectionPool  
+4) **UpdateAttribute:** Sets HDFS location paths  
+5) **UpdateAttribute:** Names the write´s path and folder, with the execution timestamp  
+6) **ConvertRecord:** Converts table to Avro format, uses the controller AvroReader and AvroRecordSetWriter  
+7) **PutHDFS:** Writes Avro Table on the HDFS path  
+8) **UpdateAttribute:** Sets filename for the log table  
+9) **ReplaceText:** Generates log table, adding a row with the name and time of the last batch   
+10) **PutHDFS:** Writes log table
+
+![nifi8](https://github.com/user-attachments/assets/4ee2e2af-5ed8-4ba0-bc3f-f0a490f76c19)
+
+(The Repository File [Process_Group_Sample.json](https://github.com/arinrohega/DE01-Pipeline01-ApacheStack-DeltaLake/blob/main/Nifi%20Process%20Groups/Process%20Group%20Sample.json) it´s the same Process Group and can also be imported)
+
+To read the 10 source tables, the Process group was replicated 10 times, each time configuring the properties of the 2nd Processor "**UpdateAttribute:**" with the table name.
+
+![nifi99](https://github.com/user-attachments/assets/4bb94f55-f428-42b6-a5a8-1db0456dda1e)
+
+
+### 3.4 Testing the Process Groups 🔄
+
+The current Staging bucket on HDFS was empty:  
+
+![hue vacia](https://github.com/user-attachments/assets/f5dd8149-81ab-4229-83e3-67575a8d0896)
+The process group for the table "Zonas" was tested by clicking on the "play" button:  
+
+![nifi play](https://github.com/user-attachments/assets/4a5880d9-958a-4939-bb5f-03ccbcab7297)  
+
+After a few seconds, the folder for the table "Zonas" was created on HDFS:  
+
+![hue vllena1](https://github.com/user-attachments/assets/6939b07f-5160-4926-aa6b-8f3205a58621)
+
+Also the Avro Table and the log with the last write were created inside the folder:
+
+![hue vllena2](https://github.com/user-attachments/assets/d2600fe2-0252-45c3-8f6f-f1bd5c037c4d)
+
+
+The remaining Process Groups were tested as well by clicking "play"
+
+![nifi91111](https://github.com/user-attachments/assets/103ac222-82ba-474f-9629-5cb78a223ad3)
+
+A folder for each source table were created:
+
+![nifi vllena34](https://github.com/user-attachments/assets/10d17948-4623-4d28-81e0-fc3187d995cf)
+
+
+After testing out the execution, all source tables were properly written to HDFS, meaning the Process Groups are ready to be automated after. 
+
+### 4. Apache Spark ⚡
 
 
 

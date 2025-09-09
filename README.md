@@ -86,9 +86,27 @@ Trigger a Databrick job after every batch.
 
 ### 2.2 Adding Integration Runtime🔄
 
-To connect MySQL to the cloud being different network environments, Integration Runtime was added on the Manage section of ADF:
+To connect MySQL to the cloud being different network environments, Integration Runtime was added through the Manage section of ADF:
 
 <img width="1213" height="399" alt="integrationruntime" src="https://github.com/user-attachments/assets/622a509b-d2f5-4d68-9d29-37bead1677ba" />
+
+### 2.3 Creating Datasets🔄
+
+Datasets for source and target storages were mounted with the following configurations:
+
+1) ADLS_pipeline01_table:
+Targets the desired location for the table and uses the following dynamic content for the path:
+
+
+
+    @concat('pipeline01/', dataset().table_name)
+   
+
+<img width="982" height="460" alt="dataset1" src="https://github.com/user-attachments/assets/55572880-fe09-40f6-8c5c-e3b81bb4750f" />
+
+
+
+<img width="353" height="385" alt="datrasets" src="https://github.com/user-attachments/assets/665422f3-08f4-4de4-8c54-97742ae62a4c" />
 
 
 ----------------------------------------

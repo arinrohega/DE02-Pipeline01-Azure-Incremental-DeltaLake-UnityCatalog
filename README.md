@@ -231,7 +231,9 @@ For following batches, the silver catalog table exists and a delta format table 
 4) Upsert the new and transformed data into catalog.silver.table.
 5) Repeat this for each desired table.
 
-<img width="1347" height="4610" alt="znotebooktest223" src="https://github.com/user-attachments/assets/78628aac-2f44-4b3f-9932-5ac1ed0b346a" />
+<img width="1347" height="2466" alt="znotebooktest22 1" src="https://github.com/user-attachments/assets/580ff4cb-2431-4456-949a-b79a019366e3" />
+
+<img width="1347" height="2136" alt="znotebooktest22 2" src="https://github.com/user-attachments/assets/de445bc0-de9e-4259-8b05-00c9f6495015" />
 
 
 sdfsdf

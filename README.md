@@ -31,23 +31,10 @@ An applicants/prospects star schema tables that shows the most relevant metrics 
 <img width="1672" height="679" alt="222 drawio" src="https://github.com/user-attachments/assets/1fc1a6db-d907-4f7d-8653-f7981ecf98b9" />
 
 ## Pipeline Preview 
-Azure Data Factory:
-<img width="1617" height="589" alt="adf pipeline" src="https://github.com/user-attachments/assets/eccb9122-6fe5-401d-83d8-17ca2101d8ed" />
-
-<img width="1640" height="746" alt="adf pipeline" src="https://github.com/user-attachments/assets/61796b7f-a701-44e9-8551-6d30df943f5a" />
 
 <img width="1640" height="746" alt="adf pipeline" src="https://github.com/user-attachments/assets/bc556c6c-76e7-4368-abf9-a6899960cf0a" />
 
-
-Databricks Job: 
-
 <img width="1044" height="306" alt="dbjon" src="https://github.com/user-attachments/assets/fb834065-a343-4517-bf07-b4bcd2ad8d0d" />
-
-<img width="1075" height="306" alt="dbjon" src="https://github.com/user-attachments/assets/ddcb6989-d8cf-4e7c-83ab-6f1f4a68c9bd" />
-
-
-
-
 
 ## Source Data Model
 ### Complete OLTP Database Model

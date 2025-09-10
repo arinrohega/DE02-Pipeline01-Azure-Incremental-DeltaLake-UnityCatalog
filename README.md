@@ -193,9 +193,10 @@ Now for any user that wants to read, write or alter any table with that location
 
 ### 3.2 Creating Catalog/Schema/Table Hierarchy ⚡
 
-To provide a governed, SQL-friendly layer on top of raw ADLS locations, for any future user of the tables, the following hierarchy was mounted:
+To provide a governed, SQL-friendly layer on top of raw ADLS locations, for any future user of the tables, a Catalog was created, with a schema for each medallion layer  
 
-<img width="1771" height="422" alt="zdb34" src="https://github.com/user-attachments/assets/65410c66-93e3-4caa-a967-28659d9167a8" />
+<img width="1589" height="422" alt="zdb34" src="https://github.com/user-attachments/assets/a16f2da7-53ca-4052-9a09-e3dc44ac1b5a" />
+
 
 
 

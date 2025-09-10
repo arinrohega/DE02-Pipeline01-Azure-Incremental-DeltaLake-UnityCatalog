@@ -166,8 +166,15 @@ The dataset list looked like this after creating all of them:
 
 ### 3. Databricks ⚡
 
+<img width="1916" height="282" alt="LOGOdb" src="https://github.com/user-attachments/assets/182df7f2-eb04-4c24-8f69-56f85200a300" />
 
+### 3.1 Setting up Unity Catalog ⚡🔐
 
+To add Unity Catalog, Databricks´s signature governance layer to the medallion containers, the following steps were done:
+
+Databricks and Access Connector for Azure Databricks resources were created from Azure Portal:
+
+<img width="936" height="93" alt="db recursos" src="https://github.com/user-attachments/assets/7383f0dc-000b-445b-aced-cfc8ffe239e9" />
 
 
 

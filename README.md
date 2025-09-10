@@ -168,16 +168,17 @@ The dataset list looked like this after creating all of them:
 
 <img width="1916" height="282" alt="LOGOdb" src="https://github.com/user-attachments/assets/182df7f2-eb04-4c24-8f69-56f85200a300" />
 
-### 3.1 Setting up Unity Catalog ⚡🔐
+### 3.1 Setting up Resources with Unity Catalog ⚡🔐
 
-To add Unity Catalog, Databricks´s signature governance layer to the medallion containers, the following steps were done:
+To use Databricks with Unity Catalog, Databricks´s signature governance layer to the medallion containers, the following steps were done:
 
 Databricks and Access Connector for Azure Databricks resources were created from Azure Portal:
 
 <img width="936" height="93" alt="db recursos" src="https://github.com/user-attachments/assets/7383f0dc-000b-445b-aced-cfc8ffe239e9" />
 
+Assign Storage blob data contributor role to Access Connector from Storage Account Access Control:
 
-
+<img width="1219" height="372" alt="dbcontributor" src="https://github.com/user-attachments/assets/96f5d6d7-8b03-4ad5-91e4-5080ed224158" />
 
 
 

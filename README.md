@@ -188,10 +188,12 @@ On Databricks Workspace, the following external locations were created:
 
 <img width="1231" height="598" alt="zdb2" src="https://github.com/user-attachments/assets/672ba685-7036-4ead-8bc3-bc84b2f21fd9" />
 
-Now for any user that wants to read, write or alter any table with that locations pahts, Unity Catalog will validate if they have permission.  
+Now for any user that wants to read, write or alter any table with that location paths, Unity Catalog will validate if they have permission.  
 
 
+### 3.2 Creating Catalog/Schema/Table Hierarchy ⚡
 
+<img width="726" height="422" alt="zdb34" src="https://github.com/user-attachments/assets/df2f73b9-4b5e-4983-952e-32d1a12e0858" />
 
 
 

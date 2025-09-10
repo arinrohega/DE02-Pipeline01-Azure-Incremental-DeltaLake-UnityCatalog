@@ -36,8 +36,12 @@ Azure Data Factory:
 
 <img width="1640" height="746" alt="adf pipeline" src="https://github.com/user-attachments/assets/61796b7f-a701-44e9-8551-6d30df943f5a" />
 
+<img width="1640" height="746" alt="adf pipeline" src="https://github.com/user-attachments/assets/bc556c6c-76e7-4368-abf9-a6899960cf0a" />
+
 
 Databricks Job: 
+
+<img width="1044" height="306" alt="dbjon" src="https://github.com/user-attachments/assets/fb834065-a343-4517-bf07-b4bcd2ad8d0d" />
 
 <img width="1075" height="306" alt="dbjon" src="https://github.com/user-attachments/assets/ddcb6989-d8cf-4e7c-83ab-6f1f4a68c9bd" />
 

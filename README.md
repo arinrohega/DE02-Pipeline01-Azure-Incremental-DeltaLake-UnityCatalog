@@ -184,8 +184,11 @@ On Databricks´s Account portal, a metastore was created using the ADLS path of 
 
 <img width="1122" height="322" alt="zdb1" src="https://github.com/user-attachments/assets/7f5db58f-b818-442b-810b-884d5d87b23d" />
 
+The following external locations were stored:
 
+<img width="1231" height="598" alt="zdb2" src="https://github.com/user-attachments/assets/672ba685-7036-4ead-8bc3-bc84b2f21fd9" />
 
+Now for any user that wants to read, write or alter any table with that locations pahts, Unity Catalog will validate if they have permission.
 
 
 

@@ -214,8 +214,24 @@ For following batches, a catalog table exists and a delta format table it´s sto
 
 <img width="1344" height="2847" alt="znotebooktestt" src="https://github.com/user-attachments/assets/7c7ebaed-9cf6-457f-a0f2-d9730c0420ac" />
 
+### 3.4 Python Notebook 2: Bronze to Silver ⚡  
 
+The main goal for this notebook its an incremental read and upsert of only new data applying transformations. It can be summarized like this:
 
+For the first batch, the Silver catalog table and the corresponding ADLS table have not been created yet.
+1) Read the full delta table from the Bronze Container using catalog.bronze.table.
+2) Apply the specific transformation that the table in turn needs.
+3) Write it to Silver Container using Delta Format while creating catalog.silver.table path.
+4) Repeat this for each desired table.
+
+For following batches, the silver catalog table exists and a delta format table it´s storaged on ADLS location.
+1) Use readstream´s checkpoint to verify if new delta batches were added data to Bronze Container.
+2) If there is no new data, terminate.
+3) If there is a new batch of data, apply the specific transformation that the table in turn needs
+4) Upsert the new and transformed data into catalog.silver.table.
+5) Repeat this for each desired table.
+
+<img width="1347" height="4610" alt="znotebooktest22" src="https://github.com/user-attachments/assets/02bf8d54-c5c5-4937-8360-ee04e7d88993" />
 
 
 

@@ -72,6 +72,9 @@ To create a watermark method for incremental loading in Azure Data Factory, an e
 ----------------------------------------
 ### 2. Azure Data Factory (ADF) 🔄
 
+<img width="1916" height="282" alt="LOGOADF" src="https://github.com/user-attachments/assets/b3cc7682-4f2b-4a5b-882f-7affadf93ba0" />
+
+
 ### 2.1 Objective🔄
 
 The main goal for the pipeline and each activity can be described like this:  

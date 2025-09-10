@@ -158,6 +158,33 @@ The dataset list looked like this after creating all of them:
 11) **Update Watermark Table (Copydata):** Updates the watermark file with the new max value for the next batch.
 12) **Databricks Job (DatabricksJob):** Triggers a Databricks job after all tables are processed.
 ----------------------------------------
+
+### 3. Databricks ⚡
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### 3. Apache NIFI 🔄
 
 ![LOGO2](https://github.com/user-attachments/assets/28c4facd-dbc4-42b6-a54e-31bbdf0e3e68)

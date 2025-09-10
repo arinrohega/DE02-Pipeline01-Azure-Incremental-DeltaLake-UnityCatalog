@@ -34,8 +34,10 @@ An applicants/prospects star schema tables that shows the most relevant metrics 
 Azure Data Factory:
 <img width="1617" height="589" alt="adf pipeline" src="https://github.com/user-attachments/assets/eccb9122-6fe5-401d-83d8-17ca2101d8ed" />
 
-Databricks Job:
-<img width="877" height="268" alt="dbjon" src="https://github.com/user-attachments/assets/4549bda5-d441-4f0a-bde5-3ca76b9c4737" />
+Databricks Job: 
+
+<img width="1048" height="323" alt="dbjon" src="https://github.com/user-attachments/assets/2095b7ea-1b0d-4218-ad9c-54861aaab8ad" />
+
 
 
 ## Source Data Model

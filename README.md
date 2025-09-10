@@ -243,7 +243,9 @@ For following batches, the gold catalog table exists and a delta format table it
 2) Apply the specific joins and agg functions to add the columns needed to build the final table.
 3) Upsert the new version of the final table into catalog.gold.table.
 
-<img width="1328" height="3363" alt="znotebooktest22 33333333" src="https://github.com/user-attachments/assets/0b4b3386-c084-4e76-9539-f7512b4cb8fa" />
+<img width="1328" height="2432" alt="znotebooktest22 33333333 1" src="https://github.com/user-attachments/assets/9daf0f16-5606-4096-8162-8909496f2537" />
+
+<img width="1328" height="839" alt="znotebooktest22 33333333 2" src="https://github.com/user-attachments/assets/f51fe438-b0a5-40e3-bc20-961de07e9ca8" />
 
 
 ## Datasets Used

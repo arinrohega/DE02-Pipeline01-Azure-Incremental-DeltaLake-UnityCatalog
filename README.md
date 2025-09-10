@@ -1,7 +1,7 @@
 # Data Engineering Pipeline - Microsoft Azure
 ## Introduction
 
-This project simulates a production-grade data engineering pipeline that automates the extraction of operational data from an OLTP database, to deliver cleaned datasets in a DeltaLake+Warehouse environment. The pipeline is built using modern Big Data applications in Azure Cloud for enterprise-level data workflows.
+This project simulates a production-grade data engineering pipeline that automates the extraction of operational data from an OLTP database, to deliver cleaned datasets in a DeltaLake environment. The pipeline is built using modern Big Data applications in Azure Cloud for enterprise-level data workflows.
 
 (Designed by Alejandro Rodríguez for educational and skill demonstration purposes)
 
@@ -16,7 +16,7 @@ This project simulates a production-grade data engineering pipeline that automat
 ## Case Scenario
 The data consumers (stakeholders and end users) require tables to be delivered with the following conditions:
 
-- Table Format: Delta (parquet) Star Schema
+- Table Format: Delta (parquet) 
 - Frecuency: Batch
 - Flow: Incremental
 - Environment: On-Cloud

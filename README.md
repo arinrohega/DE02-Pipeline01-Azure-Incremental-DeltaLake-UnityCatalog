@@ -197,10 +197,22 @@ To provide a governed, SQL-friendly layer on top of raw ADLS locations, for any 
 
 <img width="1589" height="422" alt="zdb34" src="https://github.com/user-attachments/assets/a16f2da7-53ca-4052-9a09-e3dc44ac1b5a" />
 
+### 3.3 Python Notebook 1: Landing to Bronze ⚡  
 
+The main goal for this notebook its an incremental read and upsert of only new data without transformations. It can be summarized like this:
 
+For the first batch, the catalog table and the corresponding ADLS table have not yet been created.
+1) Read the full source table on parquet from the Landing Container
+2) Write it to Bronze Container using Delta Format while creating catalog.bronze.table path.
+3) Repeat this for each desired table.
 
+For following batches, a catalog table exists and a delta format table it´s storaged on ADLS location.
+1) Use readstream´s checkpoint to verify if new parquets were added data to Landing Container
+2) If there is no new data, terminate.
+3) If there is a new batch of data, upsert it to catalog.bronze.table.
+4) Repeat this for each desired table.
 
+<img width="1919" height="5350" alt="znotebooktest" src="https://github.com/user-attachments/assets/ca4c8297-d88c-45fd-b907-9033623866a4" />
 
 
 

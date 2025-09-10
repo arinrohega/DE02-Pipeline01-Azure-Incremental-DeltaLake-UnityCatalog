@@ -253,7 +253,53 @@ All tables were made and loaded locally to MySQL database. While all data is fic
 
 ![dataset1](https://github.com/user-attachments/assets/309bd941-b8a0-40a0-ac6c-243f393cd3e7)
 
-Theres a glossary at the end, providing English translations of the table and column names if needed.
+### Learnings
+
+![funcionesusadas](https://github.com/user-attachments/assets/ff5af71f-5a19-4f68-8aad-a2940089bc55)
+
+### Spanish/English Glossary
+
+Afiliación = Affiliation  
+Apellido (primer/segundo) = Last Name (first/second)  
+Asignación = Assignment  
+Cantidad = Quantity  
+Cliente = Client / Customer  
+Comentario = Comment  
+Correo = Email  
+Código Postal = Postal Code / Zip Code  
+Curp = CURP (Mexican ID)  
+Descripción = Description  
+Dirección = Address  
+Distribuidor = Distributor  
+Empleado = Employee  
+Estatus = Status  
+Evaluación = Evaluation  
+Fecha = Date  
+Fecha Alta = Registration Date  
+Fecha Movimiento = Movement Date  
+Fecha Venta = Sale Date  
+Historial de Crédito = Credit History  
+Motivo de No Interesado = Not Interested Reason  
+Motivo de Rechazo = Rejection Reason  
+Nombre = Name  
+NSS = NSS (Social Security Number)  
+Origen = Source  
+Perfil = Profile  
+Precio = Price  
+Producto = Product  
+Prospecto = Prospect  
+Puesto = Position / Job Role  
+Región = Region  
+Referido = Referral  
+RFC = RFC (Tax ID)  
+Salario = Salary  
+Sucursal = Branch  
+Situación = Situation / Status  
+Teléfono = Phone  
+Usuario = User  
+Venta = Sale  
+Zona = Zone  
+
 
 
 

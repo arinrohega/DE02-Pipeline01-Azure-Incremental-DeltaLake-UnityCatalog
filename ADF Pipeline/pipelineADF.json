@@ -1,0 +1,588 @@
+{
+    "name": "pipeline1",
+    "properties": {
+        "activities": [
+            {
+                "name": "Por Cada Tabla",
+                "type": "ForEach",
+                "dependsOn": [],
+                "userProperties": [],
+                "typeProperties": {
+                    "items": {
+                        "value": "@pipeline().parameters.tablelist",
+                        "type": "Expression"
+                    },
+                    "isSequential": true,
+                    "activities": [
+                        {
+                            "name": "Check If WM Table Exists",
+                            "type": "GetMetadata",
+                            "dependsOn": [],
+                            "policy": {
+                                "timeout": "0.00:10:00",
+                                "retry": 1,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "dataset": {
+                                    "referenceName": "ADLS_pipeline01_watermark",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "table_name": {
+                                            "value": "@item().name_table",
+                                            "type": "Expression"
+                                        }
+                                    }
+                                },
+                                "fieldList": [
+                                    "exists"
+                                ],
+                                "storeSettings": {
+                                    "type": "AzureBlobFSReadSettings",
+                                    "recursive": true,
+                                    "enablePartitionDiscovery": false
+                                },
+                                "formatSettings": {
+                                    "type": "DelimitedTextReadSettings"
+                                }
+                            }
+                        },
+                        {
+                            "name": "If Not Exists Then True",
+                            "type": "IfCondition",
+                            "dependsOn": [
+                                {
+                                    "activity": "Check If WM Table Exists",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "expression": {
+                                    "value": "@not(activity('Check If WM Table Exists').output.exists)",
+                                    "type": "Expression"
+                                },
+                                "ifTrueActivities": [
+                                    {
+                                        "name": "Get Actual Max Watermark",
+                                        "type": "Lookup",
+                                        "dependsOn": [],
+                                        "policy": {
+                                            "timeout": "0.00:10:00",
+                                            "retry": 2,
+                                            "retryIntervalInSeconds": 30,
+                                            "secureOutput": false,
+                                            "secureInput": false
+                                        },
+                                        "userProperties": [],
+                                        "typeProperties": {
+                                            "source": {
+                                                "type": "MySqlSource",
+                                                "query": {
+                                                    "value": "SELECT\nmax(@{item().watermark_column}) AS actual_watermark\nFROM \n@{item().name_table};\n",
+                                                    "type": "Expression"
+                                                }
+                                            },
+                                            "dataset": {
+                                                "referenceName": "MySQL_companysimulation",
+                                                "type": "DatasetReference"
+                                            },
+                                            "firstRowOnly": false
+                                        }
+                                    },
+                                    {
+                                        "name": "ReadSQL WriteADLS Complete",
+                                        "type": "Copy",
+                                        "dependsOn": [
+                                            {
+                                                "activity": "Get Actual Max Watermark",
+                                                "dependencyConditions": [
+                                                    "Succeeded"
+                                                ]
+                                            }
+                                        ],
+                                        "policy": {
+                                            "timeout": "0.01:00:00",
+                                            "retry": 2,
+                                            "retryIntervalInSeconds": 30,
+                                            "secureOutput": false,
+                                            "secureInput": false
+                                        },
+                                        "userProperties": [],
+                                        "typeProperties": {
+                                            "source": {
+                                                "type": "MySqlSource",
+                                                "query": {
+                                                    "value": "SELECT * FROM @{item().name_table}",
+                                                    "type": "Expression"
+                                                }
+                                            },
+                                            "sink": {
+                                                "type": "ParquetSink",
+                                                "storeSettings": {
+                                                    "type": "AzureBlobFSWriteSettings",
+                                                    "maxConcurrentConnections": 2,
+                                                    "copyBehavior": "FlattenHierarchy",
+                                                    "blockSizeInMB": 8
+                                                },
+                                                "formatSettings": {
+                                                    "type": "ParquetWriteSettings"
+                                                }
+                                            },
+                                            "enableStaging": false,
+                                            "translator": {
+                                                "type": "TabularTranslator",
+                                                "typeConversion": true,
+                                                "typeConversionSettings": {
+                                                    "allowDataTruncation": true,
+                                                    "treatBooleanAsNumber": false
+                                                }
+                                            }
+                                        },
+                                        "inputs": [
+                                            {
+                                                "referenceName": "MySQL_companysimulation",
+                                                "type": "DatasetReference"
+                                            }
+                                        ],
+                                        "outputs": [
+                                            {
+                                                "referenceName": "ADLS_pipeline01_table",
+                                                "type": "DatasetReference",
+                                                "parameters": {
+                                                    "table_name": {
+                                                        "value": "@item().name_table",
+                                                        "type": "Expression"
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "Create Watermark Table",
+                                        "type": "Copy",
+                                        "dependsOn": [
+                                            {
+                                                "activity": "ReadSQL WriteADLS Complete",
+                                                "dependencyConditions": [
+                                                    "Succeeded"
+                                                ]
+                                            }
+                                        ],
+                                        "policy": {
+                                            "timeout": "0.00:10:00",
+                                            "retry": 2,
+                                            "retryIntervalInSeconds": 30,
+                                            "secureOutput": false,
+                                            "secureInput": false
+                                        },
+                                        "userProperties": [],
+                                        "typeProperties": {
+                                            "source": {
+                                                "type": "DelimitedTextSource",
+                                                "additionalColumns": [
+                                                    {
+                                                        "name": "table",
+                                                        "value": {
+                                                            "value": "@item().name_table",
+                                                            "type": "Expression"
+                                                        }
+                                                    },
+                                                    {
+                                                        "name": "watermark_lastbatch",
+                                                        "value": {
+                                                            "value": "@activity('Get Actual Max Watermark').output.value[0].actual_watermark",
+                                                            "type": "Expression"
+                                                        }
+                                                    }
+                                                ],
+                                                "storeSettings": {
+                                                    "type": "AzureBlobFSReadSettings",
+                                                    "recursive": false,
+                                                    "enablePartitionDiscovery": false
+                                                },
+                                                "formatSettings": {
+                                                    "type": "DelimitedTextReadSettings"
+                                                }
+                                            },
+                                            "sink": {
+                                                "type": "DelimitedTextSink",
+                                                "storeSettings": {
+                                                    "type": "AzureBlobFSWriteSettings",
+                                                    "maxConcurrentConnections": 2,
+                                                    "copyBehavior": "FlattenHierarchy",
+                                                    "blockSizeInMB": 4
+                                                },
+                                                "formatSettings": {
+                                                    "type": "DelimitedTextWriteSettings",
+                                                    "quoteAllText": true,
+                                                    "fileExtension": ".txt"
+                                                }
+                                            },
+                                            "enableStaging": false,
+                                            "translator": {
+                                                "type": "TabularTranslator",
+                                                "typeConversion": true,
+                                                "typeConversionSettings": {
+                                                    "allowDataTruncation": true,
+                                                    "treatBooleanAsNumber": false
+                                                }
+                                            }
+                                        },
+                                        "inputs": [
+                                            {
+                                                "referenceName": "Empty_csv",
+                                                "type": "DatasetReference"
+                                            }
+                                        ],
+                                        "outputs": [
+                                            {
+                                                "referenceName": "ADLS_pipeline01_watermark",
+                                                "type": "DatasetReference",
+                                                "parameters": {
+                                                    "table_name": "@item().name_table"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "If New Rows Then True",
+                            "type": "IfCondition",
+                            "dependsOn": [
+                                {
+                                    "activity": "Get Last Watermark",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                },
+                                {
+                                    "activity": "Get Actual Max Watermark 2",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "expression": {
+                                    "value": "@greater(string(activity('Get Actual Max Watermark 2').output.value[0].actual_watermark), activity('Get Last Watermark').output.value[0].watermark_lastbatch)",
+                                    "type": "Expression"
+                                },
+                                "ifTrueActivities": [
+                                    {
+                                        "name": "ReadSQL WriteADLS Incremental",
+                                        "type": "Copy",
+                                        "dependsOn": [],
+                                        "policy": {
+                                            "timeout": "0.01:00:00",
+                                            "retry": 2,
+                                            "retryIntervalInSeconds": 30,
+                                            "secureOutput": false,
+                                            "secureInput": false
+                                        },
+                                        "userProperties": [],
+                                        "typeProperties": {
+                                            "source": {
+                                                "type": "MySqlSource",
+                                                "query": {
+                                                    "value": "SELECT * FROM @{item().name_table}\nWHERE @{item().watermark_column} > '@{activity('Get Last Watermark').output.value[0].watermark_lastbatch}' \nAND @{item().watermark_column} <= '@{activity('Get Actual Max Watermark 2').output.value[0].actual_watermark}'",
+                                                    "type": "Expression"
+                                                }
+                                            },
+                                            "sink": {
+                                                "type": "ParquetSink",
+                                                "storeSettings": {
+                                                    "type": "AzureBlobFSWriteSettings",
+                                                    "maxConcurrentConnections": 2,
+                                                    "copyBehavior": "FlattenHierarchy",
+                                                    "blockSizeInMB": 8
+                                                },
+                                                "formatSettings": {
+                                                    "type": "ParquetWriteSettings"
+                                                }
+                                            },
+                                            "enableStaging": false,
+                                            "translator": {
+                                                "type": "TabularTranslator",
+                                                "typeConversion": true,
+                                                "typeConversionSettings": {
+                                                    "allowDataTruncation": true,
+                                                    "treatBooleanAsNumber": false
+                                                }
+                                            }
+                                        },
+                                        "inputs": [
+                                            {
+                                                "referenceName": "MySQL_companysimulation",
+                                                "type": "DatasetReference"
+                                            }
+                                        ],
+                                        "outputs": [
+                                            {
+                                                "referenceName": "ADLS_pipeline01_table",
+                                                "type": "DatasetReference",
+                                                "parameters": {
+                                                    "table_name": {
+                                                        "value": "@item().name_table",
+                                                        "type": "Expression"
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "name": "Update Watermark Table",
+                                        "type": "Copy",
+                                        "dependsOn": [
+                                            {
+                                                "activity": "ReadSQL WriteADLS Incremental",
+                                                "dependencyConditions": [
+                                                    "Succeeded"
+                                                ]
+                                            }
+                                        ],
+                                        "policy": {
+                                            "timeout": "0.00:10:00",
+                                            "retry": 2,
+                                            "retryIntervalInSeconds": 30,
+                                            "secureOutput": false,
+                                            "secureInput": false
+                                        },
+                                        "userProperties": [],
+                                        "typeProperties": {
+                                            "source": {
+                                                "type": "DelimitedTextSource",
+                                                "additionalColumns": [
+                                                    {
+                                                        "name": "table",
+                                                        "value": {
+                                                            "value": "@item().name_table",
+                                                            "type": "Expression"
+                                                        }
+                                                    },
+                                                    {
+                                                        "name": "watermark_lastbatch",
+                                                        "value": {
+                                                            "value": "@activity('Get Actual Max Watermark 2').output.value[0].actual_watermark",
+                                                            "type": "Expression"
+                                                        }
+                                                    }
+                                                ],
+                                                "storeSettings": {
+                                                    "type": "AzureBlobFSReadSettings",
+                                                    "recursive": false,
+                                                    "enablePartitionDiscovery": false
+                                                },
+                                                "formatSettings": {
+                                                    "type": "DelimitedTextReadSettings"
+                                                }
+                                            },
+                                            "sink": {
+                                                "type": "DelimitedTextSink",
+                                                "storeSettings": {
+                                                    "type": "AzureBlobFSWriteSettings",
+                                                    "maxConcurrentConnections": 2,
+                                                    "copyBehavior": "FlattenHierarchy",
+                                                    "blockSizeInMB": 4
+                                                },
+                                                "formatSettings": {
+                                                    "type": "DelimitedTextWriteSettings",
+                                                    "quoteAllText": true,
+                                                    "fileExtension": ".txt"
+                                                }
+                                            },
+                                            "enableStaging": false,
+                                            "translator": {
+                                                "type": "TabularTranslator",
+                                                "typeConversion": true,
+                                                "typeConversionSettings": {
+                                                    "allowDataTruncation": true,
+                                                    "treatBooleanAsNumber": false
+                                                }
+                                            }
+                                        },
+                                        "inputs": [
+                                            {
+                                                "referenceName": "Empty_csv",
+                                                "type": "DatasetReference"
+                                            }
+                                        ],
+                                        "outputs": [
+                                            {
+                                                "referenceName": "ADLS_pipeline01_watermark",
+                                                "type": "DatasetReference",
+                                                "parameters": {
+                                                    "table_name": "@item().name_table"
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Get Actual Max Watermark 2",
+                            "type": "Lookup",
+                            "dependsOn": [
+                                {
+                                    "activity": "If Not Exists Then True",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "policy": {
+                                "timeout": "0.00:10:00",
+                                "retry": 2,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "source": {
+                                    "type": "MySqlSource",
+                                    "query": {
+                                        "value": "SELECT\nmax(@{item().watermark_column}) AS actual_watermark\nFROM \n@{item().name_table};\n",
+                                        "type": "Expression"
+                                    }
+                                },
+                                "dataset": {
+                                    "referenceName": "MySQL_companysimulation",
+                                    "type": "DatasetReference"
+                                },
+                                "firstRowOnly": false
+                            }
+                        },
+                        {
+                            "name": "Get Last Watermark",
+                            "type": "Lookup",
+                            "dependsOn": [
+                                {
+                                    "activity": "If Not Exists Then True",
+                                    "dependencyConditions": [
+                                        "Succeeded"
+                                    ]
+                                }
+                            ],
+                            "policy": {
+                                "timeout": "0.00:10:00",
+                                "retry": 2,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "source": {
+                                    "type": "DelimitedTextSource",
+                                    "storeSettings": {
+                                        "type": "AzureBlobFSReadSettings",
+                                        "recursive": false,
+                                        "enablePartitionDiscovery": false
+                                    },
+                                    "formatSettings": {
+                                        "type": "DelimitedTextReadSettings"
+                                    }
+                                },
+                                "dataset": {
+                                    "referenceName": "ADLS_pipeline01_watermark",
+                                    "type": "DatasetReference",
+                                    "parameters": {
+                                        "table_name": "@item().name_table"
+                                    }
+                                },
+                                "firstRowOnly": false
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "Databricks Job",
+                "type": "DatabricksJob",
+                "dependsOn": [
+                    {
+                        "activity": "Por Cada Tabla",
+                        "dependencyConditions": [
+                            "Completed"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "0.01:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "jobId": "1104662389412751"
+                },
+                "linkedServiceName": {
+                    "referenceName": "Databricks_linkedservice",
+                    "type": "LinkedServiceReference"
+                }
+            }
+        ],
+        "parameters": {
+            "tablelist": {
+                "type": "array",
+                "defaultValue": [
+                    {
+                        "name_table": "afiliacion_usuarios",
+                        "watermark_column": "id_usuarioAfiliacion"
+                    },
+                    {
+                        "name_table": "distribuidores",
+                        "watermark_column": "created_at"
+                    },
+                    {
+                        "name_table": "distribuidores_perfiles",
+                        "watermark_column": "updated_at"
+                    },
+                    {
+                        "name_table": "prospectos",
+                        "watermark_column": "updated_at"
+                    },
+                    {
+                        "name_table": "referidos_asignaciones",
+                        "watermark_column": "fechaAsignacion"
+                    },
+                    {
+                        "name_table": "referidos_origenes",
+                        "watermark_column": "updated_at"
+                    },
+                    {
+                        "name_table": "regiones",
+                        "watermark_column": "id_region"
+                    },
+                    {
+                        "name_table": "sucursales",
+                        "watermark_column": "updated_at"
+                    },
+                    {
+                        "name_table": "ventas",
+                        "watermark_column": "created_at"
+                    },
+                    {
+                        "name_table": "zonas",
+                        "watermark_column": "id_zona"
+                    }
+                ]
+            }
+        },
+        "annotations": [],
+        "lastPublishTime": "2025-09-02T18:52:29Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}

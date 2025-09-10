@@ -170,25 +170,25 @@ The dataset list looked like this after creating all of them:
 
 ### 3.1 Setting up Resources with Unity Catalog ⚡🔐
 
-To use Databricks with Unity Catalog, Databricks´s signature governance layer to the medallion containers, the following steps were done:
+To use Databricks with Unity Catalog, Databricks´s signature governance layer to the medallion containers, the following steps were done:  
 
-Databricks and Access Connector for Azure Databricks resources were created from Azure Portal:
+Databricks and Access Connector for Azure Databricks resources were created from Azure Portal:  
 
 <img width="936" height="93" alt="db recursos" src="https://github.com/user-attachments/assets/7383f0dc-000b-445b-aced-cfc8ffe239e9" />
 
-"Storage blob data contributor" role was asigned to Access Connector from Storage Account Access Control:
+"Storage blob data contributor" role was asigned to Access Connector from Storage Account Access Control:  
 
 <img width="1219" height="372" alt="dbcontributor" src="https://github.com/user-attachments/assets/96f5d6d7-8b03-4ad5-91e4-5080ed224158" />
 
-On Databricks´s Account portal, a metastore was created using the ADLS path of the Metastore Container and the Resource ID from Access Connector. It was assigned to our workspace as well.
+On Databricks´s Account portal, a metastore was created using the ADLS path of the Metastore Container and the Resource ID from Access Connector. It was assigned to our workspace as well.  
 
 <img width="1122" height="322" alt="zdb1" src="https://github.com/user-attachments/assets/7f5db58f-b818-442b-810b-884d5d87b23d" />
 
-On Databricks Workspace, the following external locations were created:
+On Databricks Workspace, the following external locations were created:  
 
 <img width="1231" height="598" alt="zdb2" src="https://github.com/user-attachments/assets/672ba685-7036-4ead-8bc3-bc84b2f21fd9" />
 
-Now for any user that wants to read, write or alter any table with that locations pahts, Unity Catalog will validate if they have permission.
+Now for any user that wants to read, write or alter any table with that locations pahts, Unity Catalog will validate if they have permission.  
 
 
 

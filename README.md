@@ -36,11 +36,6 @@ An applicants/prospects star schema tables that shows the most relevant metrics 
 
 <img width="1044" height="306" alt="dbjon" src="https://github.com/user-attachments/assets/fb834065-a343-4517-bf07-b4bcd2ad8d0d" />
 
-<img width="1640" height="746" alt="adf pipe mini" src="https://github.com/user-attachments/assets/b7bb0ba5-3ae3-4b88-b29c-9a6d5f180b9a" />
-
-<img width="1042" height="246" alt="dbjon mini" src="https://github.com/user-attachments/assets/9a463f0e-47ce-4ffb-8cc7-de02889df672" />
-
-
 ## Source Data Model
 ### Complete OLTP Database Model
 ![datamodel1](https://github.com/user-attachments/assets/cc53a22c-a9ae-44d2-9b59-fb38ac1bdeeb)

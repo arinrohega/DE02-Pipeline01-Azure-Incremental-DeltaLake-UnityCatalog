@@ -229,7 +229,21 @@ For following batches, the silver catalog table exists and a delta format table 
 <img width="1347" height="2136" alt="znotebooktest22 2" src="https://github.com/user-attachments/assets/de445bc0-de9e-4259-8b05-00c9f6495015" />
 
 
-sdfsdf
+### 3.4 Python Notebook 3: Silver to Gold ⚡  
+
+The main goal for this notebook its to read and join the required silver tables and upsert the final table into the gold container. It can be summarized like this:
+
+For the first batch, the Gold catalog table and the corresponding ADLS table have not been created yet.
+1) Read the full delta tables from the Silver Container using catalog.silver.table.
+2) Apply the specific joins and agg functions to add the columns needed to build the final table.
+3) Write it to Gold Container using Delta Format while creating catalog.gold.table path.
+
+For following batches, the gold catalog table exists and a delta format table it´s storaged on ADLS location.
+1) Read the delta tables from the Silver Container using catalog.silver.table.
+2) Apply the specific joins and agg functions to add the columns needed to build the final table.
+3) Upsert the new version of the final table into catalog.gold.table.
+
+<img width="1328" height="3363" alt="znotebooktest22 33333333" src="https://github.com/user-attachments/assets/0b4b3386-c084-4e76-9539-f7512b4cb8fa" />
 
 
 ## Datasets Used

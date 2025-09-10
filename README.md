@@ -253,10 +253,6 @@ All tables were made and loaded locally to MySQL database. While all data is fic
 
 ![dataset1](https://github.com/user-attachments/assets/309bd941-b8a0-40a0-ac6c-243f393cd3e7)
 
-### Learnings
-
-![funcionesusadas](https://github.com/user-attachments/assets/ff5af71f-5a19-4f68-8aad-a2940089bc55)
-
 ### Spanish/English Glossary
 
 Afiliación = Affiliation  

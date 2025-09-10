@@ -212,7 +212,8 @@ For following batches, a catalog table exists and a delta format table it´s sto
 3) If there is a new batch of data, upsert it to catalog.bronze.table.
 4) Repeat this for each desired table.
 
-<img width="1919" height="5350" alt="znotebooktest" src="https://github.com/user-attachments/assets/ca4c8297-d88c-45fd-b907-9033623866a4" />
+<img width="1344" height="3242" alt="znotebooktest" src="https://github.com/user-attachments/assets/8b6a1062-0be1-4482-9faf-9e58a7657be5" />
+
 
 
 

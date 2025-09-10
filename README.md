@@ -36,7 +36,8 @@ Azure Data Factory:
 
 Databricks Job: 
 
-<img width="1048" height="323" alt="dbjon" src="https://github.com/user-attachments/assets/2095b7ea-1b0d-4218-ad9c-54861aaab8ad" />
+<img width="1048" height="323" alt="dbjon" src="https://github.com/user-attachments/assets/0a7157b8-7e36-47cd-bae5-a3de14cb54a8" />
+
 
 
 

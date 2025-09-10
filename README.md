@@ -176,12 +176,13 @@ Databricks and Access Connector for Azure Databricks resources were created from
 
 <img width="936" height="93" alt="db recursos" src="https://github.com/user-attachments/assets/7383f0dc-000b-445b-aced-cfc8ffe239e9" />
 
-Assign Storage blob data contributor role to Access Connector from Storage Account Access Control:
+"Storage blob data contributor" role was asigned to Access Connector from Storage Account Access Control:
 
 <img width="1219" height="372" alt="dbcontributor" src="https://github.com/user-attachments/assets/96f5d6d7-8b03-4ad5-91e4-5080ed224158" />
 
+On Databricks´s Account portal, a metastore was created using the ADLS path of the Metastore Container and the Resource ID from Access Connector
 
-
+<img width="1122" height="322" alt="zdb1" src="https://github.com/user-attachments/assets/7f5db58f-b818-442b-810b-884d5d87b23d" />
 
 
 

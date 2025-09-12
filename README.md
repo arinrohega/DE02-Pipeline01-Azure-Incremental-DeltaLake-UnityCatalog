@@ -28,8 +28,6 @@ An applicants/prospects star schema tables that shows the most relevant metrics 
 
 ## Architecture
 
-<img width="1672" height="679" alt="222 drawio" src="https://github.com/user-attachments/assets/1fc1a6db-d907-4f7d-8653-f7981ecf98b9" />
-
 <img width="1635" height="643" alt="drawww etl" src="https://github.com/user-attachments/assets/4382cc6b-336d-4763-a395-ce9b0e384042" />
 
 

@@ -248,6 +248,12 @@ For following batches, the gold catalog table exists and a delta format table it
 
 <img width="1328" height="839" alt="znotebooktest22 33333333 2" src="https://github.com/user-attachments/assets/f51fe438-b0a5-40e3-bc20-961de07e9ca8" />
 
+### 3.5 Triggering the Pipeline: Results⏱️
+
+After triggering the Azure Data Factory pipeline that executes both ADF activities and Databricks Job, the results were visible on the ADLS containers.
+
+<img width="1753" height="488" alt="results drawio" src="https://github.com/user-attachments/assets/249af4bf-dee3-4bfc-ae3e-91f727b127b5" />
+
 
 ## Datasets Used
 All tables were made and loaded locally to MySQL database. While all data is fictitious, each element was designed meticulously to replicate a real enterprise model, mirroring the afiliation schema of a company I've previously worked with, mantaining logical relationships and consistency across tables.

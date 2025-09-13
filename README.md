@@ -250,7 +250,7 @@ For following batches, the gold catalog table exists and a delta format table it
 
 ### 3.5 Triggering the Pipeline: Results⏱️
 
-After triggering the Azure Data Factory pipeline that executes both ADF activities and Databricks Job, the results were visible on the ADLS containers.
+After triggering the Azure Data Factory pipeline (manually or on a schedule) that executes both ADF activities and Databricks Job, the results were visible on the ADLS containers.
 
 <img width="1753" height="488" alt="results drawio" src="https://github.com/user-attachments/assets/249af4bf-dee3-4bfc-ae3e-91f727b127b5" />
 

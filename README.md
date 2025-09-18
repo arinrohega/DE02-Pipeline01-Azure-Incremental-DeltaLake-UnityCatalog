@@ -24,7 +24,7 @@ The data consumers (stakeholders and end users) require tables to be delivered w
 
 - Description:
 
-An applicants/prospects star schema tables that shows the most relevant metrics from their affiliation process, and calculating the date of first purchase which marks their transition to official affiliated status.
+An applicants/prospects cleaned table that shows the most relevant metrics from their affiliation process, and calculating the date of first purchase which marks their transition to official affiliated status.
 
 ## Architecture
 
